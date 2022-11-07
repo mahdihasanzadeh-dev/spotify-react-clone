@@ -9,6 +9,7 @@ import { RelatedSongs } from './related-songs/related-songs';
 import { MusicPlayer } from './music-player/music-player';
 import { Loader } from './loader/loader';
 import { Error } from './error/error';
+import { PlayPause } from './play-pause/play-pause';
 
 export {
   TopPlay,
@@ -22,4 +23,5 @@ export {
   MusicPlayer,
   Loader,
   Error,
+  PlayPause,
 };

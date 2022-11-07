@@ -1,3 +1,4 @@
+import type { IRootState } from '@redux/store-interface';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
@@ -5,7 +6,7 @@ import { Searchbar, Sidebar, MusicPlayer, TopPlay } from './components';
 import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, TopCharts } from './pages';
 
 function App() {
-  const { activeSong } = useSelector((state) => state.player);
+  const { activeSong } = useSelector((state: IRootState) => state.player);
 
   return (
     <div className="relative flex">
@@ -31,7 +32,7 @@ function App() {
         </div>
       </div>
 
-      {activeSong?.title && (
+      {activeSong.title && (
         <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
           <MusicPlayer />
         </div>

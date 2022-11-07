@@ -1,11 +1,15 @@
+/* eslint-disable no-param-reassign */
+import type { Track } from '@components/song-card/song-card-interface';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import type { IPlayerSliceState } from './features-interface';
 
-const initialState = {
+const initialState:IPlayerSliceState = {
   currentSongs: [],
   currentIndex: 0,
   isActive: false,
   isPlaying: false,
-  activeSong: {},
+  activeSong: {} as Track,
   genreListId: '',
 };
 
@@ -13,13 +17,13 @@ const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    setActiveSong: (state, action) => {
+    setActiveSong: (state: IPlayerSliceState, action:PayloadAction<unknown>) => {
       state.activeSong = action.payload.song;
 
-      if (action.payload?.data?.tracks?.hits) {
+      if (action.payload.data?.tracks?.hits) {
         state.currentSongs = action.payload.data.tracks.hits;
-      } else if (action.payload?.data?.properties) {
-        state.currentSongs = action.payload?.data?.tracks;
+      } else if (action.payload.data?.properties) {
+        state.currentSongs = action.payload.data?.tracks;
       } else {
         state.currentSongs = action.payload.data;
       }
@@ -60,6 +64,12 @@ const playerSlice = createSlice({
   },
 });
 
-export const { setActiveSong, nextSong, prevSong, playPause, selectGenreListId } = playerSlice.actions;
+export const {
+  setActiveSong,
+  nextSong,
+  prevSong,
+  playPause,
+  selectGenreListId,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;

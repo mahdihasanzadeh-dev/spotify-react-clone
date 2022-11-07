@@ -1,12 +1,19 @@
 import type { ReactElement } from 'react';
 import { BsFillVolumeUpFill, BsVolumeDownFill, BsFillVolumeMuteFill } from 'react-icons/bs';
+import type { IVolumeBarProperties } from './volume-bar-interface';
 
-export function VolumeBar({ value, min, max, onChange, setVolume }): ReactElement {
+export function VolumeBar({
+  value,
+  min,
+  max,
+  onChange,
+  setVolume,
+}: IVolumeBarProperties): ReactElement {
   return (
     <div className="hidden lg:flex flex-1 items-center justify-end">
-      {value <= 1 && value > 0.5 && <BsFillVolumeUpFill size={25} color="#FFF" onClick={() => setVolume(0)} />}
-      {value <= 0.5 && value > 0 && <BsVolumeDownFill size={25} color="#FFF" onClick={() => setVolume(0)} />}
-      {value === 0 && <BsFillVolumeMuteFill size={25} color="#FFF" onClick={() => setVolume(1)} />}
+      {value <= 1 && value > 0.5 && <BsFillVolumeUpFill size={25} color="#FFF" onClick={() => setVolume(0 as number)} />}
+      {value <= 0.5 && value > 0 && <BsVolumeDownFill size={25} color="#FFF" onClick={() => setVolume(0 as number)} />}
+      {value === 0 && <BsFillVolumeMuteFill size={25} color="#FFF" onClick={() => setVolume(1 as number)} />}
       <input
         type="range"
         step="any"

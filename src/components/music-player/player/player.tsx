@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { useRef, useEffect } from 'react';
 import type { ReactElement } from 'react';
+import type { IPlayerProperties } from './player-interface';
 
 export function Player({
   activeSong,
@@ -8,10 +9,11 @@ export function Player({
   volume,
   seekTime,
   onEnded,
+  currentIndex,
   onTimeUpdate,
   onLoadedData,
-  repeat,
-}):ReactElement {
+  isRepeat,
+}: IPlayerProperties):ReactElement {
   const ref = useRef(null);
 
   // eslint-disable-next-line no-unused-expressions
@@ -29,14 +31,14 @@ export function Player({
 
   // updates audio element only on seekTime change (and not on each rerender):
   useEffect(() => {
-    ref.current.currentTime = seekTime;
+    ref.current.currentTime = Math.floor(Number(seekTime));
   }, [seekTime]);
 
   return (
     <audio
-      src={activeSong?.hub?.actions[1]?.uri}
+      src={activeSong?.hub.actions[1]?.uri}
       ref={ref}
-      loop={repeat}
+      loop={isRepeat}
       onEnded={onEnded}
       onTimeUpdate={onTimeUpdate}
       onLoadedData={onLoadedData}

@@ -1,8 +1,11 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { useState, useEffect } from 'react';
 import type { ReactElement, Dispatch } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { nextSong, prevSong, playPause } from '@redux/features/playerSlice';
+import { playPause } from '@redux/features/player-slice';
 import type { AnyAction } from '@reduxjs/toolkit';
+import type { IRootState } from '@redux/store-interface';
 import { Controls } from './controls/controls';
 import { Player } from './player/player';
 import { Seekbar } from './seekbar/seekbar';
@@ -12,13 +15,15 @@ import type { IMusicPlayerState } from './music-player-interface';
 import { musicPlayerHelper } from './music-player-helper';
 
 export function MusicPlayer(): ReactElement {
+  const dispatch: Dispatch<AnyAction> = useDispatch();
+
   const {
     activeSong,
     currentSongs,
     currentIndex,
     isActive,
     isPlaying,
-  } = useSelector((state) => state.player);
+  } = useSelector((state: IRootState) => state.player);
 
   const [state, setState] = useState<IMusicPlayerState>({
     duration: 0,
@@ -39,18 +44,11 @@ export function MusicPlayer(): ReactElement {
     dispatch,
   );
 
-  const [duration, setDuration] = useState(0);
-  const [seekTime, setSeekTime] = useState(0);
-  const [appTime, setAppTime] = useState(0);
-  const [volume, setVolume] = useState(0.3);
-  const [repeat, setRepeat] = useState(false);
-  const [shuffle, setShuffle] = useState(false);
-  const dispatch: Dispatch<AnyAction> = useDispatch();
+  const { isShuffle, isRepeat, duration, seekTime, appTime, volume } = state;
 
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex]);
-
 
   return (
     <div className="relative sm:px-12 px-8 w-full flex items-center justify-between">
@@ -59,10 +57,10 @@ export function MusicPlayer(): ReactElement {
         <Controls
           isPlaying={isPlaying}
           isActive={isActive}
-          repeat={repeat}
-          setRepeat={setRepeat}
-          shuffle={shuffle}
-          setShuffle={setShuffle}
+          isRepeat={isRepeat}
+          handleRepeat={helper.handleRepeat}
+          isShuffle={isShuffle}
+          handleShuffle={helper.handleShuffle}
           currentSongs={currentSongs}
           handlePlayPause={helper.handlePlayPause}
           handlePrevSong={helper.handlePrevSong}
@@ -72,8 +70,9 @@ export function MusicPlayer(): ReactElement {
           value={appTime}
           min="0"
           max={duration}
-          onInput={(event) => setSeekTime(event.target.value)}
-          setSeekTime={setSeekTime}
+          onInput={helper.handleSeekTime}
+          decreaseSeekTime={helper.decreaseSeekTime}
+          increaseSeekTime={helper.increaseSeekTime}
           appTime={appTime}
         />
         <Player
@@ -81,14 +80,14 @@ export function MusicPlayer(): ReactElement {
           volume={volume}
           isPlaying={isPlaying}
           seekTime={seekTime}
-          repeat={repeat}
+          isRepeat={isRepeat}
           currentIndex={currentIndex}
           onEnded={helper.handleNextSong}
-          onTimeUpdate={(event) => setAppTime(event.target.currentTime)}
-          onLoadedData={(event) => setDuration(event.target.duration)}
+          onTimeUpdate={helper.handleAppTime}
+          onLoadedData={helper.handleDuration}
         />
       </div>
-      <VolumeBar value={volume} min="0" max="1" onChange={(event) => setVolume(event.target.value)} setVolume={setVolume} />
+      <VolumeBar value={volume} min="0" max="1" onChange={helper.handleVolume} setVolume={helper.setVolume} />
     </div>
   );
 }
