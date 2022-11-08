@@ -1,22 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// try {
-//     const response = await fetch("https://shazam.p.rapidapi.com/charts/track", {
-//       "method": "GET",
-//       "headers": {
-//         "X-RapidAPI-Key": "57cb7a0729msh90b682ec6b15c5dp1f4530jsnf5b95967a893",
-//         "X-RapidAPI-Host": "shazam.p.rapidapi.com"
-//       }
-//     });
-
-//     if (response.ok) {
-//       const result = await response.json();
-//       console.log(result);
-//     }
-//   } catch (err) {
-//     console.error(err);
-//   }
-
 export const shazmCoreApi = createApi({
   reducerPath: 'shazmCoreApi',
   baseQuery: fetchBaseQuery({

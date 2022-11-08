@@ -1,7 +1,17 @@
+import { Language } from '@common/common-enum';
+import { SEO } from '@components/seo/seo';
 import type { ReactElement } from 'react';
 
 export function Search(): ReactElement {
   return (
-    <div>Search</div>
+    <>
+      <SEO
+        pageTitle="SpotifyClone-Search"
+        description="spotify clone with react, typescript, tailwind"
+        keywords={['spotify', 'clone', 'reactjs', 'typescript', 'tailwind']}
+        language={Language.EN_US}
+      />
+      <h1 className="text-white font-bold text-3xl">Search</h1>
+    </>
   );
 }

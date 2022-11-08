@@ -14,7 +14,6 @@ export function TopPlay(): ReactElement {
   const { activeSong, isPlaying } = useSelector((state: IRootState) => state.player);
   const { data } = useGetTopChartsQuery('');
   const divRef = useRef<HTMLIFrameElement>(null);
-  // const topPlays = data?.slice(0, 5);
 
   useEffect(() => {
     divRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -35,12 +34,17 @@ export function TopPlay(): ReactElement {
       className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[550px] max-w-full flex flex-col"
     >
       <div className="w-full flex flex-col">
-        <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Charts</h2>
-          <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">see more</p>
-          </Link>
-        </div>
+        {
+          (Boolean(data)) && (
+            <div className="flex flex-row justify-between items-center">
+              <h2 className="text-white font-bold text-2xl">Top Charts</h2>
+              <Link to="/top-charts">
+                <p className="text-gray-300 text-base cursor-pointer">see more</p>
+              </Link>
+            </div>
+          )
+        }
+
         <div className="mt-4 flex flex-col gap-1">
           {data?.tracks?.slice(0, 5).map((song: Track, i: number) => (
             <TopChartCard
