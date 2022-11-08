@@ -80,7 +80,7 @@ export interface Track {
   hub: Hub;
   artists: Artist[];
   url: string;
-  highlightsurls: Highlightsurls;
+  highlightsurls?: Highlightsurls;
   properties: unknown;
 }
 
