@@ -5,6 +5,4 @@ export interface IRelatedSongsProperties {
     artistId?: string;
     isPlaying: boolean;
     activeSong: Track,
-    handlePlayClick: (song: Track, i: number) => void,
-    handlePauseClick: () =>void
 }

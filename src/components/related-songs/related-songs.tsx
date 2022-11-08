@@ -1,7 +1,8 @@
 import { useGetSongRelatedQuery } from '@redux/services/shazm-core';
 import { Error, Loader, SongBar } from '@components/index';
 import type { ReactElement } from 'react';
-import { logger } from '@common/common-function';
+import { setActiveSong, playPause, setCurrentSong } from '@redux/features/player-slice';
+import { useDispatch } from 'react-redux';
 import type { Track } from '@components/song-card/song-card-interface';
 import type { IRelatedSongsProperties } from './related-songs-interface';
 
@@ -9,15 +10,22 @@ export function RelatedSongs({
   artistId = '40008598',
   isPlaying,
   activeSong,
-  handlePlayClick,
-  handlePauseClick,
 }: IRelatedSongsProperties): ReactElement {
+  const dispatch = useDispatch();
   const { data, isFetching, error } = useGetSongRelatedQuery(artistId);
+
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+
+  const handlePlayClick = (song: Track, i: number) => {
+    dispatch(setActiveSong({ song, data, i }));
+    dispatch(playPause(true));
+    dispatch(setCurrentSong(data.tracks));
+  };
 
   if (isFetching) return <Loader title="Loading related songs ..." />;
   if (error) return <Error />;
-
-  logger(data);
 
   return (
     <div className="flex flex-col">

@@ -1,27 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 import type { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '@components/index';
-import { setActiveSong, playPause } from '@redux/features/player-slice';
 import { useGetSongDetailsQuery } from '@redux/services/shazm-core';
 import type { IRootState } from '@redux/store-interface';
-import type { Track } from '@components/song-card/song-card-interface';
 
 export function SongDetails(): ReactElement {
-  const dispatch = useDispatch();
   const { songid } = useParams();
   const { activeSong, isPlaying } = useSelector((state: IRootState) => state.player);
   const { data, isFetching, error } = useGetSongDetailsQuery(songid);
-
-  const handlePauseClick = () => {
-    dispatch(playPause(false));
-  };
-
-  const handlePlayClick = (song: Track, i: number) => {
-    dispatch(setActiveSong({ song, data, i }));
-    dispatch(playPause(true));
-  };
 
   if (isFetching) return <Loader title="Loading song details ..." />;
   if (error) return <Error />;
@@ -43,8 +31,6 @@ export function SongDetails(): ReactElement {
       <RelatedSongs
         isPlaying={isPlaying}
         activeSong={activeSong}
-        handlePlayClick={handlePlayClick}
-        handlePauseClick={handlePauseClick}
       />
     </div>
   );
