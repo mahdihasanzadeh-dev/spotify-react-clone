@@ -9,6 +9,7 @@ This Repo Contains a Spotify Clone made using Reactjs and Typescript.
 - Tailwind CSS
 - RapidApi(shazm api)
 ## Features
+- Users can search music
 - Users can repeat music
 - Users can shuffle music
 - Fully Responsive
@@ -18,7 +19,7 @@ This Repo Contains a Spotify Clone made using Reactjs and Typescript.
 
 ## How to run
 1. Clone this repo.
-2. Go To https://rapidapi.com/apidojo/api/shazam and suscrie this api.
+2. Go To https://rapidapi.com/apidojo/api/shazam and subscribe this api.
 3. Create .env file and fill variable base .env.example file
 4. run "npm install" command
 5. run "npm run dev" command
