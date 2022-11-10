@@ -15,6 +15,7 @@ export const shazmCoreApi = createApi({
     getTopCharts: builder.query({ query: () => ({ url: '/charts/track' }) }),
     getSongDetails: builder.query({ query: (songId) => ({ url: '/songs/get-details', params: { key: songId, locale: 'en-US' } }) }),
     getSongRelated: builder.query({ query: (artistId) => ({ url: '/songs/list-artist-top-tracks', params: { id: artistId, locale: 'en-US' } }) }),
+    getSongBySearch: builder.query({ query: (searchTerm) => ({ url: '/search', params: { term: searchTerm, locale: 'en-US', offset: '0', limit: '50' } }) }),
   }),
 });
 
@@ -22,4 +23,5 @@ export const {
   useGetTopChartsQuery,
   useGetSongDetailsQuery,
   useGetSongRelatedQuery,
+  useGetSongBySearchQuery,
 } = shazmCoreApi;

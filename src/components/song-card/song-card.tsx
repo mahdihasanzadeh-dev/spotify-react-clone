@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { PlayPause } from '@components/index';
@@ -45,9 +46,10 @@ export function SongCard({
           </Link>
         </p>
         <p className="text-sm truncate text-gray-300 mt-1">
-          <Link to={song.artists.length > 0 ? `/artists/${song.artists[0].adamid}` : '/top-artists'}>
+          {song.subtitle}
+          {/* <Link to={song.artists.length > 0 ? `/artists/${song.artists[0].adamid}` : '/top-artists'}>
             {song.subtitle}
-          </Link>
+          </Link> */}
         </p>
       </div>
     </div>

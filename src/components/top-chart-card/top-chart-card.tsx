@@ -27,9 +27,10 @@ export function TopChartCard({
           <Link to={`/songs/${song.key}`}>
             <p className="text-xl font-bold text-white">{song.title}</p>
           </Link>
-          <Link to={`/artists/${song.artists[0].adamid}`}>
+          {/* <Link to={`/artists/${song.artists[0].adamid}`}>
             <p className=" text-base mt-1 text-gray-300">{song.title}</p>
-          </Link>
+          </Link> */}
+          <p className=" text-base mt-1 text-gray-300">{song.title}</p>
         </div>
       </div>
       <PlayPause

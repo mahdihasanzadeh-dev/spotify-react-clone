@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import { logger } from '@common/common-function';
-import { genres } from '@assets/constants';
+// import { genres } from '@assets/constants';
 import { Loader, SongCard } from '@components/index';
 import { useGetTopChartsQuery } from '@redux/services/shazm-core';
 import { Error } from '@components/error/error';
@@ -34,7 +33,7 @@ export function Discover() : ReactElement {
             {' '}
             {genreTitle}
           </h2>
-          <select
+          {/* <select
             onChange={() => { logger('df'); }}
             value=""
             className="bg-black text-gray-300 p-3 text-sm rounded-lg outline-nonesm:mt-0 mt-5"
@@ -47,7 +46,7 @@ export function Discover() : ReactElement {
               );
             })
           }
-          </select>
+          </select> */}
         </div>
         <div className="flex flex-wrap sm:justify-start justify-center gap-8">
           {

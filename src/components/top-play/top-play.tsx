@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { playPause, setActiveSong } from '@redux/features/player-slice';
 import { useGetTopChartsQuery } from '@redux/services/shazm-core';
@@ -38,9 +38,9 @@ export function TopPlay(): ReactElement {
           (Boolean(data)) && (
             <div className="flex flex-row justify-between items-center">
               <h2 className="text-white font-bold text-2xl">Top Charts</h2>
-              <Link to="/top-charts">
+              {/* <Link to="/top-charts">
                 <p className="text-gray-300 text-base cursor-pointer">see more</p>
-              </Link>
+              </Link> */}
             </div>
           )
         }
